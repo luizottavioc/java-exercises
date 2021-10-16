@@ -1,4 +1,4 @@
-package aplicacoes;
+package aplicacao;
 
 import java.util.Scanner;
 
@@ -69,7 +69,7 @@ public class Prova06do10 {
 		System.out.println("\n- Quantidade de temperaturas menores do que 18°C: "+count[0]+" ("+interv[0]+")");
 		System.out.println("- Quantidade de temperaturas entre 18°C e 30C: "+count[1]+" ("+interv[1]+")");
 		System.out.println("- Quantidade de temperaturas maiores do que 30°C: "+count[2]+" ("+interv[2]+")");
-		//System.out.printf("- Média das temperaturas: %.2f°C\n",med);
+		System.out.printf("- Média das temperaturas: %.2f°C\n",med);
 		s.close();
 	}
 
