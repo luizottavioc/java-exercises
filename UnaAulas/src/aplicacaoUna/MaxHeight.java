@@ -1,4 +1,4 @@
-package aplicacao;
+package aplicacaoUna;
 
 import javax.swing.JOptionPane;
 
