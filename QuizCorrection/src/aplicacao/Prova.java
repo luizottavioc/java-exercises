@@ -7,7 +7,7 @@ public class Prova {
 	private int pontuacao;
 	private String acertadas;
 	
-	public void Prova() {
+	Prova() {
 		gabarito = new char[10];
 		resposta = new char[10];
 		exist = false;
