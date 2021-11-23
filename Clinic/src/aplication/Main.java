@@ -32,13 +32,14 @@ public class Main {
 					if(meth.contagemArrayDoc(doctors) == 0) {
 						JOptionPane.showMessageDialog(null, "Ainda não existem médicos cadastrados no sistema!");
 						break;
-					}else {
+					} else {
 						while(logVerificador != -1) {
 							login = JOptionPane.showInputDialog(null, "Login: ");
 							senha = JOptionPane.showInputDialog(null, "Senha: ");
 							if(meth.existLogDoc(doctors, login, senha)) {
 								logVerificador = -1;
 								log = -1;
+								JOptionPane.showMessageDialog(null, "Login executado com sucesso!");
 							}else {
 								int prosseguir = Integer.parseInt(JOptionPane.showInputDialog(null, "Login ou senha erradas!\n"
 										+ "- Deseja voltar? digite 1\n"
@@ -50,18 +51,34 @@ public class Main {
 						}
 						break;
 					}
-				}else if(ltype == 2) {
+				} else if(ltype == 2) {
 					if(meth.contagemArraySec(secretary) == 0) {
 						JOptionPane.showMessageDialog(null, "Ainda não existem secretários cadastrados no sistema!");
 						break;
 					}else {
-						
+						while(logVerificador != -1) {
+							login = JOptionPane.showInputDialog(null, "Login: ");
+							senha = JOptionPane.showInputDialog(null, "Senha: ");
+							if(meth.existLogSec(secretary, login, senha)) {
+								logVerificador = -1;
+								log = -1;
+								JOptionPane.showMessageDialog(null, "Login executado com sucesso!");
+							}else {
+								int prosseguir = Integer.parseInt(JOptionPane.showInputDialog(null, "Login ou senha erradas!\n"
+										+ "- Deseja voltar? digite 1\n"
+										+ "- Deseja prosseguir? digite qualquer número com excessão do número 1"));
+								if(prosseguir == 1) {
+									break;
+								}
+							}	
+						}
+						break;
 					}
-					break;
-				}else {
+					
+				} else {
 					JOptionPane.showMessageDialog(null, "Você não inseriu um valor válido!");
+					break;
 				}
-				break;
 			case 2:
 				ntype = Integer.parseInt(JOptionPane.showInputDialog(null, "Tipo de usuário: (1-Médico - 2-Secretário) "));
 				nome = JOptionPane.showInputDialog(null, "Nome: ");
