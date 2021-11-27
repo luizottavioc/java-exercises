@@ -1,4 +1,4 @@
-package entityEmployee;
+package entitys;
 
 public class Doctor extends Employee {
 	private String especialidade;
@@ -9,4 +9,22 @@ public class Doctor extends Employee {
 		this.crm = crm;
 		this.especialidade = especialidade;
 	}
+
+	public String getEspecialidade() {
+		return especialidade;
+	}
+
+	public void setEspecialidade(String especialidade) {
+		this.especialidade = especialidade;
+	}
+
+	public String getCrm() {
+		return crm;
+	}
+
+	public void setCrm(String crm) {
+		this.crm = crm;
+	}
+	
+	
 }

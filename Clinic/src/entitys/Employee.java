@@ -1,4 +1,4 @@
-package entityEmployee;
+package entitys;
 
 public abstract class Employee {
 	protected String login;

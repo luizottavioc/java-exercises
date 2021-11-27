@@ -1,20 +1,19 @@
 package appointment;
 
-import entityEmployee.Doctor;
-import entityEmployee.Secretary;
+import entitys.*;
 
 public class Appointment {
 	private Doctor medico;
 	private Secretary secretaria;
-	private String data, nomePac, idadePac;
+	private String data;
+	private Pacient pacient;
 	private double valor;
 	
-	public Appointment(Doctor medico, Secretary secretaria, String data, String nomePac, String idadePac, double valor) {
+	public Appointment(Doctor medico, Secretary secretaria, String data, Pacient pacient, double valor) {
 		this.medico = medico;
 		this.secretaria = secretaria;
 		this.data = data;
-		this.nomePac = nomePac;
-		this.idadePac = idadePac;
+		this.pacient = pacient;
 		this.valor = valor;
 	}
 
@@ -42,20 +41,12 @@ public class Appointment {
 		this.data = data;
 	}
 
-	public String getNomePac() {
-		return nomePac;
+	public Pacient getPacient() {
+		return pacient;
 	}
 
-	public void setNomePac(String nomePac) {
-		this.nomePac = nomePac;
-	}
-
-	public String getIdadePac() {
-		return idadePac;
-	}
-
-	public void setIdadePac(String idadePac) {
-		this.idadePac = idadePac;
+	public void setPacient(Pacient pacient) {
+		this.pacient = pacient;
 	}
 
 	public double getValor() {
@@ -65,7 +56,7 @@ public class Appointment {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	
+
 	
 	
 }
