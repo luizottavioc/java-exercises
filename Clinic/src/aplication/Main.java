@@ -27,6 +27,8 @@ public class Main {
 				+ " - Inscrição de 30 pacientes\n"
 				+ " - Realização de 30 consultas", "Tela de boas vindas", JOptionPane.PLAIN_MESSAGE);
 		
+		System.out.println(doctors.length);
+		
 		do {
 			logVerificador = 0;
 			log = Integer.parseInt(JOptionPane.showInputDialog(null, "Realize o seu login! \n"
@@ -97,8 +99,7 @@ public class Main {
 					logDisp = false;
 					while(logDisp == false) {
 						login = JOptionPane.showInputDialog(null, "Login: ", "Cadastro", JOptionPane.PLAIN_MESSAGE);
-						logDisp = !meth.existJustLogDoc(doctors, login);
-						System.out.println(logDisp);
+						logDisp = !meth.existJustLogDoc(doctors, login); 
 						if(!logDisp) {
 							JOptionPane.showMessageDialog(null, "Este login não está disponível para cadastro, tente novamente!", "Erro", JOptionPane.ERROR_MESSAGE);
 						}
@@ -137,15 +138,23 @@ public class Main {
 								+ "3- Sair", "Menu de opções", JOptionPane.PLAIN_MESSAGE));
 						switch(op) {
 						case 1:
-							numAtribuicao = Integer.parseInt(JOptionPane.showInputDialog(null, "Indique o número da consulta que irá realizar:\n"
-									+ meth.returnAgendaDoc(consultas, login), "Realizar atendimento!", JOptionPane.PLAIN_MESSAGE));
-							meth.removerCons(consultas, numAtribuicao, login);
-							meth.realocarCons(consultas);
-							JOptionPane.showMessageDialog(null, "Consulta removida do sistema!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
+							if(meth.existConsToDoc(consultas, login)) {
+								numAtribuicao = Integer.parseInt(JOptionPane.showInputDialog(null, "Indique o número da consulta que irá realizar:\n\n"
+										+ meth.returnAgendaDoc(consultas, login), "Realizar atendimento!", JOptionPane.PLAIN_MESSAGE));
+								meth.removerCons(consultas, numAtribuicao, login);
+								meth.realocarCons(consultas);
+								JOptionPane.showMessageDialog(null, "Consulta removida do sistema!", "Sucesso!", JOptionPane.PLAIN_MESSAGE);
+							}else{
+								JOptionPane.showMessageDialog(null, "Não existem consultas marcadas para o médico "+doctors[meth.getNumDoc(doctors, login)].getNome()+" no sistema!", "Erro", JOptionPane.PLAIN_MESSAGE);
+							}
+							
 							break;
 						case 2:
-							meth.realocarCons(consultas);
-							JOptionPane.showMessageDialog(null, meth.returnAgendaDoc(consultas, login), "Verificação de agenda", JOptionPane.PLAIN_MESSAGE);
+							if(meth.existConsToDoc(consultas, login)) {
+								JOptionPane.showMessageDialog(null, meth.returnAgendaDoc(consultas, login), "Verificação de agenda", JOptionPane.PLAIN_MESSAGE);
+							}else {
+								JOptionPane.showMessageDialog(null, "Não existem consultas marcadas para o médico "+doctors[meth.getNumDoc(doctors, login)].getNome()+" no sistema!", "Erro", JOptionPane.PLAIN_MESSAGE);
+							}
 							break;
 						case 3:
 							opSair = Integer.parseInt(JOptionPane.showInputDialog(null, "Como você deseja sair?\n"
@@ -184,6 +193,9 @@ public class Main {
 									pacCadas = true;
 									numPac = meth.contagemArrayPac(pacients)-1;
 									JOptionPane.showMessageDialog(null, "Paciente cadastrado!", "Agendamento de consulta", JOptionPane.PLAIN_MESSAGE);
+								}else{
+									JOptionPane.showMessageDialog(null, "Esse cliente já está cadastrado no sistema! Portanto, não será necessário informar"
+											+ " novamente seus dados", "Agendamento de consulta", JOptionPane.PLAIN_MESSAGE);
 								}
 								dataCons = JOptionPane.showInputDialog(null, "Indique a data que a consulta será realizada:", "Agendamento de consulta", JOptionPane.PLAIN_MESSAGE);
 								numAtribuicao = Integer.parseInt(JOptionPane.showInputDialog(null, "Indique o médico que irá realizar a consulta:\n\n"

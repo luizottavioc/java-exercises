@@ -7,6 +7,7 @@ import appointment.Appointment;
 
 public class MainMethods {
 	
+	
 	public int contagemArrayDoc(Doctor[] array) {
 		int counter = 0;
 		for (int i = 0; i < array.length; i ++)
@@ -141,7 +142,7 @@ public class MainMethods {
 				result += "Dados da "+(i+1)+"ª consulta: \n"
 						+ "- Data: "+array[i].getData()+"\n"
 						+ "- Médico: "+array[i].getMedico().getNome()+"\n"
-						+ "- Paciente: "+array[i].getPacient().getNome()+"\n";
+						+ "- Paciente: "+array[i].getPacient().getNome()+"\n\n";
 			}
 		}
 		return result;
@@ -149,18 +150,27 @@ public class MainMethods {
 	
 	public String returnAgendaDoc(Appointment[] consultas, String login) {
 		int j=1;
-		String result = "Consultas marcadas para o médico "+login+": \n";
+		String result = "Consultas marcadas para o médico "+login+": \n\n";
 		for (int i = 0; i<contagemArrayCons(consultas); i++) {
 			if(consultas[i].getMedico().getLogin().equals(login)) {
-				result = "Dados da "+j+"ª consulta: \n"
+				result += "Dados da "+j+"ª consulta: \n"
 						+ "- Data: "+consultas[i].getData()+"\n"
 						+ "- Paciente: "+consultas[i].getPacient().getNome()+"\n"
 						+ "- Valor: "+consultas[i].getValor()+"\n"
-						+ "- Consulta marcada por: "+consultas[i].getSecretaria().getNome()+"\n";
+						+ "- Consulta marcada por: "+consultas[i].getSecretaria().getNome()+"\n\n";
 				j++;
 			}
 		}
 		return result;
+	}
+	
+	public boolean existConsToDoc(Appointment[] consultas, String logDoctor) {
+		for (int i = 0; i<contagemArrayCons(consultas); i++) {
+			if(consultas[i].getMedico().getLogin() == logDoctor) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public boolean removerCons(Appointment[] consultas, int nCons, String logDoc) {
@@ -181,11 +191,16 @@ public class MainMethods {
 	}
 	
 	public boolean realocarCons(Appointment[] consultas) {
-		for(int i=0; consultas.length<i;i++) {
-			if(consultas[i] != null && consultas[i].getData().equals("REALIZADA")) {
+		//Retirará do vetor a consulta que tiver a data setada como "realizada"
+		for(int i=0; i<consultas.length-1; i++) {
+			if(consultas[i] != null && consultas[i].getData() == "REALIZADA") {
 				consultas[i] = consultas[i+1];
-			}else if(consultas[i] != null && consultas[i]==consultas[i-1]) {
-				consultas[i] = consultas[i+1];
+				for(int j = i+1; j<consultas.length-1; j++) {
+					consultas[j] = consultas[j+1];
+				}
+				if(consultas[consultas.length-1] == consultas[consultas.length-2]) {
+					consultas[consultas.length-1] = null;
+				}
 			}
 		}
 		return true;
