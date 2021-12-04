@@ -166,11 +166,21 @@ public class MainMethods {
 	
 	public boolean existConsToDoc(Appointment[] consultas, String logDoctor) {
 		for (int i = 0; i<contagemArrayCons(consultas); i++) {
-			if(consultas[i].getMedico().getLogin() == logDoctor) {
+			if(consultas[i].getMedico().getLogin().equals(logDoctor)) {
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	public int qtdConsToDoc(Appointment[] consultas, String logDoctor) {
+		int cont = 0;
+		for (int i = 0; i<contagemArrayCons(consultas); i++) {
+			if(consultas[i].getMedico().getLogin().equals(logDoctor)) {
+				cont++;
+			}
+		}
+		return cont;
 	}
 	
 	public boolean removerCons(Appointment[] consultas, int nCons, String logDoc) {
